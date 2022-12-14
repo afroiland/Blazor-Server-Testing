@@ -1,0 +1,26 @@
+﻿@page "/characters"
+@inject IConfiguration config;
+
+<PageTitle>Characters</PageTitle>
+
+<h1>Characters</h1>
+@*<button class="btn btn-primary">List All</button>*@
+
+<ul>
+    @foreach (var character in characters)
+    {
+        <CharacterInfoBox c=character></CharacterInfoBox>
+    }
+</ul>
+
+@code {
+    private static string connectionString = "";
+    private static string query = "SELECT * FROM npcs";
+    List<CharacterModel> characters;
+
+    protected override void OnInitialized()
+    {
+        connectionString = config.GetConnectionString("Default").ToString();
+        characters = DBConnection.QueryDB(connectionString, query);
+    }
+}
