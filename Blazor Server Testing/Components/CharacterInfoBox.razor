@@ -1,8 +1,29 @@
 ﻿<div class="characterInfoBox">
-    @c.Name, @c.Title
+
+    <EditForm Model="@c2" OnInvalidSubmit="@SaveCharacter">
+
+        <InputText @bind-Value="c.Name"/>
+        <InputText @bind-Value="c.Title" />
+        <InputNumber @bind-Value="c.Level" />
+        <InputText @bind-Value="c.CharacterClass" />
+
+        <input type="submit" value="Save"/>
+
+    </EditForm>
 </div>
 
 @code {
     [Parameter]
     public CharacterModel c { get; set; }
+    public CharacterModel c2 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        c2 = new CharacterModel();
+    }
+
+    private void SaveCharacter()
+    {
+        
+    }
 }

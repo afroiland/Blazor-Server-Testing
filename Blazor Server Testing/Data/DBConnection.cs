@@ -17,6 +17,7 @@ namespace Blazor_Server_Testing.DB_Connection
                 connection.Open();
                 var result = connection.Query<CharacterModel>(query);
 
+                //TODO: Pull this out into its own method and have QueryDB return result, no?
                 foreach (var x in result)
                 {
                     listResult.Add(x);
