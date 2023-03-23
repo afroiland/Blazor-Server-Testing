@@ -1,18 +1,19 @@
-﻿<div class="characterInfoBox">
+﻿@inject IConfiguration config;
 
-    <EditForm Model="@c2" OnInvalidSubmit="@SaveCharacter">
-
+<div class="characterInfoBox">
+    <EditForm Model="@c2" OnValidSubmit="@SaveCharacter">
         <InputText @bind-Value="c.Name"/>
         <InputText @bind-Value="c.Title" />
         <InputNumber @bind-Value="c.Level" />
         <InputText @bind-Value="c.CharacterClass" />
 
         <input type="submit" value="Save"/>
-
     </EditForm>
 </div>
 
 @code {
+    private static string connectionString = "";
+
     [Parameter]
     public CharacterModel c { get; set; }
     public CharacterModel c2 { get; set; }
@@ -24,6 +25,9 @@
 
     private void SaveCharacter()
     {
-        
+        connectionString = config.GetConnectionString("Default").ToString();
+        string query = "UPDATE npcs SET title='" + c.Title + "' WHERE name='" + c.Name + "'";
+        DBConnection.UpdateDB(connectionString, query);
     }
 }
+ 

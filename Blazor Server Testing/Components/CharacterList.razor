@@ -1,15 +1,10 @@
-﻿@page "/characters"
-@inject IConfiguration config;
-
-<PageTitle>Characters</PageTitle>
-
-<h1>Characters</h1>
-@*<button class="btn btn-primary">List All</button>*@
+﻿@inject IConfiguration config;
 
 <ul>
     @foreach (var character in characters)
     {
-        <CharacterInfoBox c=character></CharacterInfoBox>
+        <p>@character.Name, @character.Title<br />
+        Level @character.Level @character.CharacterClass</p>
     }
 </ul>
 
@@ -21,6 +16,6 @@
     protected override void OnInitialized()
     {
         connectionString = config.GetConnectionString("Default").ToString();
-        characters = DBConnection.QueryDB(connectionString, query);
+        characters = DBConnection.GetCharactersFromDB(connectionString, query);
     }
 }
