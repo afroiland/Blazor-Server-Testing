@@ -8,7 +8,7 @@ namespace Blazor_Server_Testing.DB_Connection
 {
     public class DBConnection
     {
-        public static List<CharacterModel> QueryDB(string connectionString, string query)
+        public static List<CharacterModel> GetCharactersFromDB(string connectionString, string query)
         {
             List<CharacterModel> listResult = new();
 
@@ -17,7 +17,6 @@ namespace Blazor_Server_Testing.DB_Connection
                 connection.Open();
                 var result = connection.Query<CharacterModel>(query);
 
-                //TODO: Pull this out into its own method and have QueryDB return result, no?
                 foreach (var x in result)
                 {
                     listResult.Add(x);
@@ -25,6 +24,15 @@ namespace Blazor_Server_Testing.DB_Connection
             }
 
             return listResult;
+        }
+
+        public static void UpdateDB(string connectionString, string query)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var result = connection.Query(query);
+            }
         }
     }
 }

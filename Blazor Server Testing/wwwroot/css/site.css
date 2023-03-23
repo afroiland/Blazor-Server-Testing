@@ -94,3 +94,24 @@ a, .btn-link {
     padding: 5px;
     margin: 4px 4px 4px 4px;
 }
+
+.columnA {
+    float: left;
+    width: 16%;
+    border-style: solid;
+    border-color: red;
+}
+
+.columnB {
+    float: left;
+    width: 42%;
+    border-style: solid;
+    border-color: red;
+}
+
+/* Clear floats after the columns */
+/*.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}*/
